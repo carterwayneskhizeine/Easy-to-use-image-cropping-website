@@ -372,18 +372,22 @@
 
     // 切换Tab
     function toggleTab() {
+      const importButton = document.querySelector('.tab-button button:first-child'); // 获取"导入图片"按钮
+      
       if (isCalculatorVisible) {
         // 切换到图像编辑器
         calculator.style.display = 'none';
         imageEditor.style.display = 'flex';
-        resolutionDisplay.parentElement.style.display = 'block'; // 显示分辨率信息
+        resolutionDisplay.parentElement.style.display = 'block';
         toggleTabBtn.textContent = '切换到比例计算器';
+        importButton.style.display = 'block'; // 显示"导入图片"按钮
       } else {
         // 切换到比例计算器
         calculator.style.display = 'block';
         imageEditor.style.display = 'none';
-        resolutionDisplay.parentElement.style.display = 'none'; // 隐藏分辨率信息
+        resolutionDisplay.parentElement.style.display = 'none';
         toggleTabBtn.textContent = '切换到图像编辑器';
+        importButton.style.display = 'none'; // 隐藏"导入图片"按钮
       }
       isCalculatorVisible = !isCalculatorVisible;
     }
