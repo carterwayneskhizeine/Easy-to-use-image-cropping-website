@@ -456,4 +456,26 @@ body.light-mode .calculator-hint {
         padding: 6px 12px;
         font-size: 14px;
     }
+}
+
+/* GitHub 链接样式 */
+.github-link {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    color: var(--text-color-dark);
+    transition: color 0.3s;
+}
+
+.github-link:hover {
+    color: var(--primary-color);
+}
+
+/* 适配浅色模式 */
+body.light-mode .github-link {
+    color: var(--text-color-light);
+}
+
+body.light-mode .github-link:hover {
+    color: var(--primary-color);
 } 
