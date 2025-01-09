@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>图片工具箱</title>
     <link rel="stylesheet" href="styles.css">
@@ -12,7 +12,7 @@
         <div class="function-switch">
             <button id="switchToEditor" class="active">图片裁剪</button>
             <button id="switchToCalculator">比例计算</button>
-        </div>
+  </div>
 
         <!-- 图片编辑器界面 -->
         <div id="imageEditor" class="tool-panel active">
@@ -21,7 +21,7 @@
                     <canvas id="canvas"></canvas>
                     <div id="drop-zone" class="drop-zone">
                         <p>拖拽图片到此处或点击上传</p>
-                        <input type="file" id="fileInput" accept="image/*" style="display: none;">
+      <input type="file" id="fileInput" accept="image/*" style="display: none;">
                     </div>
                 </div>
 
@@ -53,32 +53,32 @@
                             <button data-aspect="4:3">4:3</button>
                             <button data-aspect="1:1">1:1</button>
                         </div>
-                    </div>
+      </div>
                     <button id="flipVertical">垂直镜像</button>
-                </div>
+        </div>
 
                 <div class="control-panel">
                     <div class="control-group">
                         <input type="number" id="widthInput" placeholder="宽度" value="512">
                         <input type="number" id="heightInput" placeholder="高度" value="384">
                         <button id="setResolution">设置分辨率</button>
-                    </div>
+        </div>
 
                     <div class="control-group">
                         <button id="rotateLeft">左旋</button>
                         <button id="rotateRight">右旋</button>
                         <button id="zoomIn">放大1px</button>
                         <button id="zoomOut">缩小1px</button>
-                    </div>
+        </div>
 
                     <div class="control-group">
                         <button id="copyToClipboard">复制到剪贴板</button>
                         <button id="downloadImage">下载图片</button>
                         <button id="toggleTheme">切换主题</button>
-                    </div>
-                </div>
-            </div>
         </div>
+        </div>
+      </div>
+    </div>
 
         <!-- 比例计算器界面 -->
         <div id="calculator" class="tool-panel">
@@ -86,21 +86,28 @@
                 <div class="calculator-group">
                     <div class="ratio-buttons">
                         <button class="ratio-btn" data-ratio="16:9">16:9</button>
+                        <button class="ratio-btn" data-ratio="16:10">16:10</button>
                         <button class="ratio-btn" data-ratio="16:11">16:11</button>
                         <button class="ratio-btn" data-ratio="4:3">4:3</button>
                         <button class="ratio-btn" data-ratio="2:1">2:1</button>
                         <button class="ratio-btn" data-ratio="21:9">21:9</button>
+                        <button class="ratio-btn" data-ratio="3:2">3:2</button>
+                        <button class="ratio-btn" data-ratio="19.5:9">19.5:9</button>
+                        <button class="ratio-btn" data-ratio="2.39:1">2.39:1</button>
+                        <button class="ratio-btn" data-ratio="2.76:1">2.76:1</button>
+                        <button class="ratio-btn" data-ratio="12:5">12:5</button>
+                        <button class="ratio-btn" data-ratio="4:1">4:1</button>
                     </div>
                     <div class="input-row">
-                        <label>A = </label>
-                        <input type="number" id="valueA" step="any">
-                        <label>B = </label>
-                        <input type="number" id="valueB" step="any">
-                    </div>
+        <label>A = </label>
+        <input type="number" id="valueA" step="any">
+        <label>B = </label>
+        <input type="number" id="valueB" step="any">
+      </div>
                     <div class="input-row">
-                        <label>C = </label>
+        <label>C = </label>
                         <input type="number" id="valueC" step="any">
-                        <label>D = </label>
+        <label>D = </label>
                         <input type="number" id="valueD" step="any">
                     </div>
                 </div>
@@ -110,9 +117,9 @@
                         <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
                     </svg>
                 </a>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
     <script src="script.js"></script>
 </body>
-</html> 
+</html>
