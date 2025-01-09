@@ -382,14 +382,14 @@ body.light-mode .dropdown-content button {
 
 .input-row {
     display: flex;
-    gap: 12px;
+    gap: 6px;
     align-items: center;
     justify-content: center;
 }
 
 .input-row label {
     font-size: 16px;
-    min-width: 40px;
+    min-width: 30px;
 }
 
 .input-row input {
