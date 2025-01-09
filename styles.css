@@ -478,4 +478,13 @@ body.light-mode .github-link {
 
 body.light-mode .github-link:hover {
     color: var(--primary-color);
+}
+
+/* 微信浏览器提示样式 */
+.wechat-browser-tip {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    color: #ff4d4f;
+    font-size: 14px;
 } 
