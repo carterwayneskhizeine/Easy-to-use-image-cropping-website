@@ -440,6 +440,18 @@ class ProportionCalculator {
 
 // 在文件末尾添加功能切换逻辑
 window.addEventListener('DOMContentLoaded', () => {
+    // 检测是否是微信浏览器
+    function isWechatBrowser() {
+        const ua = navigator.userAgent.toLowerCase();
+        return /micromessenger/.test(ua) && /mobile/.test(ua);
+    }
+
+    // 显示或隐藏微信浏览器提示
+    const wechatBrowserTip = document.getElementById('wechatBrowserTip');
+    if (isWechatBrowser()) {
+        wechatBrowserTip.style.display = 'block';
+    }
+
     const imageEditor = new ImageEditor();
     const calculator = new ProportionCalculator();
 
