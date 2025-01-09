@@ -1,3 +1,8 @@
+// 添加设备检测函数
+function isMobileDevice() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
 class ImageEditor {
     constructor() {
         this.canvas = document.getElementById('canvas');
@@ -19,7 +24,12 @@ class ImageEditor {
     }
 
     initializeCanvas() {
-        this.setCanvasSize(512, 384);
+        // 根据设备类型设置不同的默认分辨率
+        if (isMobileDevice()) {
+            this.setCanvasSize(384, 288);
+        } else {
+            this.setCanvasSize(512, 384);
+        }
     }
 
     setCanvasSize(width, height) {
@@ -380,6 +390,15 @@ class ImageEditor {
 // 在文件开头添加比例计算器类
 class ProportionCalculator {
     constructor() {
+        // 根据设备类型设置不同的默认值
+        if (isMobileDevice()) {
+            document.getElementById('valueC').value = '384';
+            document.getElementById('valueD').value = '288';
+        }
+        // A和B的值保持4:3不变
+        document.getElementById('valueA').value = '4';
+        document.getElementById('valueB').value = '3';
+        
         this.setupEventListeners();
         // 初始化时就计算一次
         this.calculateFromC();
