@@ -19,7 +19,7 @@ class ImageEditor {
     }
 
     initializeCanvas() {
-        this.setCanvasSize(512, 512);
+        this.setCanvasSize(512, 384);
     }
 
     setCanvasSize(width, height) {
@@ -386,6 +386,19 @@ class ProportionCalculator {
     setupEventListeners() {
         document.getElementById('valueC').addEventListener('input', () => this.calculateFromC());
         document.getElementById('valueD').addEventListener('input', () => this.calculateFromD());
+        
+        // 添加比例按钮点击事件
+        document.querySelectorAll('.ratio-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const ratio = e.target.dataset.ratio;
+                const [a, b] = ratio.split(':').map(Number);
+                document.getElementById('valueA').value = a;
+                document.getElementById('valueB').value = b;
+                // 清空 C 和 D 的值
+                document.getElementById('valueC').value = '';
+                document.getElementById('valueD').value = '';
+            });
+        });
     }
 
     calculateFromC() {

@@ -91,6 +91,15 @@
         left: 50%;
         transform: translateX(-50%);
     }
+
+    .ratio-buttons {
+        gap: 8px;
+    }
+    
+    .ratio-btn {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
 }
 
 /* 更小屏幕的优化 */
@@ -412,4 +421,39 @@ body.light-mode .input-row input {
 
 body.light-mode .calculator-hint {
     color: var(--text-color-light);
+}
+
+/* 添加比例按钮样式 */
+.ratio-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.ratio-btn {
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.ratio-btn:hover {
+    background: #1557b0;
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 768px) {
+    .ratio-buttons {
+        gap: 8px;
+    }
+    
+    .ratio-btn {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
 } 

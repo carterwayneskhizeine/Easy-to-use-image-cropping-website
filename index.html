@@ -30,6 +30,7 @@
                 </div>
 
                 <div class="preset-controls">
+                    <button id="flipHorizontal">水平镜像</button>
                     <div class="dropdown">
                         <button class="dropdown-btn">预设分辨率</button>
                         <div class="dropdown-content">
@@ -53,29 +54,28 @@
                             <button data-aspect="1:1">1:1</button>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="control-panel">
-                <div class="control-group">
-                    <input type="number" id="widthInput" placeholder="宽度" value="512">
-                    <input type="number" id="heightInput" placeholder="高度" value="512">
-                    <button id="setResolution">设置分辨率</button>
-                </div>
-
-                <div class="control-group">
-                    <button id="rotateLeft">左旋</button>
-                    <button id="rotateRight">右旋</button>
-                    <button id="zoomIn">放大1px</button>
-                    <button id="zoomOut">缩小1px</button>
-                    <button id="flipHorizontal">水平镜像</button>
                     <button id="flipVertical">垂直镜像</button>
                 </div>
 
-                <div class="control-group">
-                    <button id="copyToClipboard">复制到剪贴板</button>
-                    <button id="downloadImage">下载图片</button>
-                    <button id="toggleTheme">切换主题</button>
+                <div class="control-panel">
+                    <div class="control-group">
+                        <input type="number" id="widthInput" placeholder="宽度" value="512">
+                        <input type="number" id="heightInput" placeholder="高度" value="384">
+                        <button id="setResolution">设置分辨率</button>
+                    </div>
+
+                    <div class="control-group">
+                        <button id="rotateLeft">左旋</button>
+                        <button id="rotateRight">右旋</button>
+                        <button id="zoomIn">放大1px</button>
+                        <button id="zoomOut">缩小1px</button>
+                    </div>
+
+                    <div class="control-group">
+                        <button id="copyToClipboard">复制到剪贴板</button>
+                        <button id="downloadImage">下载图片</button>
+                        <button id="toggleTheme">切换主题</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -84,6 +84,13 @@
         <div id="calculator" class="tool-panel">
             <div class="calculator-container">
                 <div class="calculator-group">
+                    <div class="ratio-buttons">
+                        <button class="ratio-btn" data-ratio="16:9">16:9</button>
+                        <button class="ratio-btn" data-ratio="16:11">16:11</button>
+                        <button class="ratio-btn" data-ratio="4:3">4:3</button>
+                        <button class="ratio-btn" data-ratio="2:1">2:1</button>
+                        <button class="ratio-btn" data-ratio="21:9">21:9</button>
+                    </div>
                     <div class="input-row">
                         <label>A = </label>
                         <input type="number" id="valueA" step="any">
