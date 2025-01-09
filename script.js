@@ -381,11 +381,22 @@ class ImageEditor {
 class ProportionCalculator {
     constructor() {
         this.setupEventListeners();
+        // 初始化时就计算一次
+        this.calculateFromC();
+        // 初始化时就更新裁剪界面的分辨率
+        this.updateCropResolution();
     }
 
     setupEventListeners() {
-        document.getElementById('valueC').addEventListener('input', () => this.calculateFromC());
-        document.getElementById('valueD').addEventListener('input', () => this.calculateFromD());
+        document.getElementById('valueC').addEventListener('input', () => {
+            this.calculateFromC();
+            this.updateCropResolution();
+        });
+        
+        document.getElementById('valueD').addEventListener('input', () => {
+            this.calculateFromD();
+            this.updateCropResolution();
+        });
         
         // 添加比例按钮点击事件
         document.querySelectorAll('.ratio-btn').forEach(button => {
@@ -435,6 +446,19 @@ class ProportionCalculator {
         
         const c = Math.round((a * d) / b);
         document.getElementById('valueC').value = c;
+    }
+
+    // 添加新方法：更新裁剪界面的分辨率输入框
+    updateCropResolution() {
+        const widthInput = document.getElementById('widthInput');
+        const heightInput = document.getElementById('heightInput');
+        const valueC = document.getElementById('valueC').value;
+        const valueD = document.getElementById('valueD').value;
+        
+        if (valueC && valueD) {
+            widthInput.value = valueC;
+            heightInput.value = valueD;
+        }
     }
 }
 
