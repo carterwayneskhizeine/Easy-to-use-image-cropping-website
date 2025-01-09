@@ -328,22 +328,32 @@ body.light-mode .dropdown-content button {
     display: flex;
     gap: 12px;
     margin-bottom: 20px;
-    width: 100%;
     justify-content: center;
 }
 
 .function-switch button {
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 8px 16px;
+    border: none;
     border-radius: 20px;
     background: var(--surface-color-dark);
     color: var(--text-color-dark);
-    border: 2px solid transparent;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
 .function-switch button.active {
     background: var(--primary-color);
     color: white;
+}
+
+/* 导入图片按钮样式 */
+#importImage {
+    background: var(--primary-color);
+    color: white;
+}
+
+#importImage:hover {
+    background: #1557b0;
 }
 
 .tool-panel {

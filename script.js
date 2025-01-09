@@ -1,4 +1,4 @@
-// 添加设备检测函数
+// 添加移动设备检测函数
 function isMobileDevice() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
@@ -33,7 +33,8 @@ class ImageEditor {
     }
 
     setCanvasSize(width, height) {
-        const maxDisplaySize = 512;
+        // 根据设备类型设置不同的最大显示尺寸
+        const maxDisplaySize = isMobileDevice() ? 384 : 512;
         const aspectRatio = width / height;
         const container = this.canvas.parentElement;
         
@@ -499,16 +500,23 @@ window.addEventListener('DOMContentLoaded', () => {
     const calculator = new ProportionCalculator();
 
     // 功能切换按钮
+    const importImage = document.getElementById('importImage');
     const switchToEditor = document.getElementById('switchToEditor');
     const switchToCalculator = document.getElementById('switchToCalculator');
     const editorPanel = document.getElementById('imageEditor');
     const calculatorPanel = document.getElementById('calculator');
+
+    // 导入图片按钮点击事件
+    importImage.addEventListener('click', () => {
+        document.getElementById('fileInput').click();
+    });
 
     switchToEditor.addEventListener('click', () => {
         switchToEditor.classList.add('active');
         switchToCalculator.classList.remove('active');
         editorPanel.classList.add('active');
         calculatorPanel.classList.remove('active');
+        importImage.style.display = 'inline-block'; // 显示导入图片按钮
     });
 
     switchToCalculator.addEventListener('click', () => {
@@ -516,6 +524,7 @@ window.addEventListener('DOMContentLoaded', () => {
         switchToEditor.classList.remove('active');
         calculatorPanel.classList.add('active');
         editorPanel.classList.remove('active');
+        importImage.style.display = 'none'; // 隐藏导入图片按钮
     });
 
     // 检查并恢复上次的主题设置
