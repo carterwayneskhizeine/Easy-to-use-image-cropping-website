@@ -423,15 +423,19 @@ body.light-mode .calculator-hint {
     color: var(--text-color-light);
 }
 
-/* 添加比例按钮样式 */
+/* 修改比例按钮样式 */
 .ratio-buttons {
     display: flex;
     gap: 12px;
-    flex-wrap: wrap;
     justify-content: center;
     margin-bottom: 20px;
+    flex-wrap: nowrap; /* 强制不换行 */
+    overflow-x: auto; /* 如果空间不够则显示滚动条 */
+    padding-bottom: 8px; /* 为可能出现的滚动条留出空间 */
+    -webkit-overflow-scrolling: touch; /* 在iOS上提供更好的滚动体验 */
 }
 
+/* 修改按钮样式以适应单行显示 */
 .ratio-btn {
     padding: 8px 16px;
     border-radius: 20px;
@@ -440,16 +444,17 @@ body.light-mode .calculator-hint {
     border: none;
     cursor: pointer;
     transition: background-color 0.2s;
+    flex-shrink: 0; /* 防止按钮被压缩 */
+    white-space: nowrap; /* 防止按钮文字换行 */
 }
 
-.ratio-btn:hover {
-    background: #1557b0;
-}
-
-/* 移动端适配 */
+/* 移动端适配时保持按钮不换行 */
 @media screen and (max-width: 768px) {
     .ratio-buttons {
         gap: 8px;
+        justify-content: flex-start; /* 在小屏幕上左对齐 */
+        padding-left: 4px; /* 添加一点左边距 */
+        padding-right: 4px; /* 添加一点右边距 */
     }
     
     .ratio-btn {
