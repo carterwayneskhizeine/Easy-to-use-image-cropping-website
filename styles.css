@@ -505,8 +505,10 @@ body.en-mode button,
 body.en-mode input,
 body.en-mode p,
 body.en-mode span,
-body.en-mode label {
-    font-size: 0.5em;
+body.en-mode label,
+body.en-mode #flipHorizontal,
+body.en-mode #flipVertical {
+    font-size: 9px !important;
 }
 
 /* 保持原始字体大小的元素 */
