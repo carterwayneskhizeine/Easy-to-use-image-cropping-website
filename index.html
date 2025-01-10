@@ -10,9 +10,10 @@
     <div class="container">
         <!-- 功能切换按钮 -->
         <div class="function-switch">
-            <button id="importImage" class="active">导入图片</button>
-            <button id="switchToEditor" class="active">图片裁剪</button>
-            <button id="switchToCalculator">比例计算</button>
+            <button id="importImage" class="active" data-lang-zh="导入图片" data-lang-en="Import Image">导入图片</button>
+            <button id="switchToEditor" class="active" data-lang-zh="图片裁剪" data-lang-en="Image Crop">图片裁剪</button>
+            <button id="switchToCalculator" data-lang-zh="比例计算" data-lang-en="Ratio Calculator">比例计算</button>
+            <button id="languageToggle">ZH</button>
   </div>
 
         <!-- 图片编辑器界面 -->
@@ -21,33 +22,29 @@
                 <div class="canvas-container">
                     <canvas id="canvas"></canvas>
                     <div id="drop-zone" class="drop-zone">
-                        <p>拖拽图片到此处或点击上传</p>
+                        <p data-lang-zh="拖拽图片到此处或点击上传" data-lang-en="Drag image here or click to upload">拖拽图片到此处或点击上传</p>
       <input type="file" id="fileInput" accept="image/*" style="display: none;">
                     </div>
                 </div>
 
                 <div class="canvas-info">
-                    <p>当前画布分辨率：<span id="currentResolution">512 x 512</span></p>
+                    <p data-lang-zh="当前画布分辨率：" data-lang-en="Current Canvas Resolution:">当前画布分辨率：<span id="currentResolution">512 x 512</span></p>
                 </div>
 
                 <div class="preset-controls">
-                    <button id="flipHorizontal">水平镜像</button>
+                    <button id="flipHorizontal" data-lang-zh="水平镜像" data-lang-en="Flip Horizontal">水平镜像</button>
                     <div class="dropdown">
-                        <button class="dropdown-btn">预设分辨率</button>
+                        <button class="dropdown-btn" data-lang-zh="预设分辨率" data-lang-en="Preset Resolutions">预设分辨率</button>
                         <div class="dropdown-content">
-                            <button data-resolution="256">256 x 256</button>
                             <button data-resolution="512">512 x 512</button>
                             <button data-resolution="1024">1024 x 1024</button>
-                            <button data-resolution="2048">2048 x 2048</button>
                             <button data-resolution-width="786" data-resolution-height="512">786 x 512</button>
                             <button data-resolution-width="1280" data-resolution-height="720">1280 x 720</button>
-                            <button data-resolution-width="1366" data-resolution-height="768">1366 x 768</button>
-                            <button data-resolution-width="1920" data-resolution-height="1080">1920 x 1080</button>
                         </div>
                     </div>
 
                     <div class="dropdown">
-                        <button class="dropdown-btn">宽高比</button>
+                        <button class="dropdown-btn" data-lang-zh="宽高比" data-lang-en="Aspect Ratio">宽高比</button>
                         <div class="dropdown-content">
                             <button data-aspect="16:9">16:9</button>
                             <button data-aspect="9:16">9:16</button>
@@ -55,31 +52,31 @@
                             <button data-aspect="1:1">1:1</button>
                         </div>
       </div>
-                    <button id="flipVertical">垂直镜像</button>
+                    <button id="flipVertical" data-lang-zh="垂直镜像" data-lang-en="Flip Vertical">垂直镜像</button>
         </div>
 
                 <div class="control-panel">
                     <div class="control-group">
                         <input type="number" id="widthInput" placeholder="宽度" value="512">
                         <input type="number" id="heightInput" placeholder="高度" value="384">
-                        <button id="setResolution">设置分辨率</button>
+                        <button id="setResolution" data-lang-zh="设置分辨率" data-lang-en="Set Resolution">设置分辨率</button>
         </div>
 
                     <div class="control-group">
-                        <button id="rotateLeft">左旋</button>
-                        <button id="rotateRight">右旋</button>
-                        <button id="zoomIn">放大1px</button>
-                        <button id="zoomOut">缩小1px</button>
+                        <button id="rotateLeft" data-lang-zh="左旋" data-lang-en="Rotate Left">左旋</button>
+                        <button id="rotateRight" data-lang-zh="右旋" data-lang-en="Rotate Right">右旋</button>
+                        <button id="zoomIn" data-lang-zh="放大1px" data-lang-en="Zoom In 1px">放大1px</button>
+                        <button id="zoomOut" data-lang-zh="缩小1px" data-lang-en="Zoom Out 1px">缩小1px</button>
         </div>
 
                     <div class="control-group">
-                        <button id="copyToClipboard">复制到剪贴板</button>
-                        <button id="downloadImage">下载图片</button>
-                        <button id="toggleTheme">切换主题</button>
+                        <button id="copyToClipboard" data-lang-zh="复制到剪贴板" data-lang-en="Copy to Clipboard">复制到剪贴板</button>
+                        <button id="downloadImage" data-lang-zh="下载图片" data-lang-en="Download Image">下载图片</button>
+                        <button id="toggleTheme" data-lang-zh="切换主题" data-lang-en="Toggle Theme">切换主题</button>
         </div>
         </div>
         <!-- 添加微信浏览器提示 -->
-        <div id="wechatBrowserTip" class="wechat-browser-tip" style="display: none;">
+        <div id="wechatBrowserTip" class="wechat-browser-tip" style="display: none;" data-lang-zh="请使用浏览器打开使用完整功能" data-lang-en="Please use a browser to access full features">
             请使用浏览器打开使用完整功能
         </div>
       </div>
@@ -116,7 +113,7 @@
                         <input type="number" id="valueD" step="any" value="384">
                     </div>
                 </div>
-                <p class="calculator-hint">输入C计算D，或输入D计算C</p>
+                <p class="calculator-hint" data-lang-zh="输入C计算D，或输入D计算C" data-lang-en="Enter C to calculate D, or enter D to calculate C">输入C计算D，或输入D计算C</p>
                 <a href="https://github.com/carterwayneskhizeine/Easy-to-use-image-cropping-website/" class="github-link" target="_blank" rel="noopener noreferrer">
                     <svg height="32" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="32">
                         <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>

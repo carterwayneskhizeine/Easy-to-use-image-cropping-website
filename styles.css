@@ -1,7 +1,7 @@
 :root {
-    --primary-color: #1a73e8;
-    --text-color-light: #202124;
-    --bg-color-light: #ffffff;
+    --primary-color: #4d76ae;
+    --text-color-light: #1557b0;
+    --bg-color-light: #e7e7e7;
     --surface-color-light: #f8f9fa;
     --text-color-dark: #e8eaed;
     --bg-color-dark: #202124;
@@ -303,7 +303,7 @@ input[type="number"] {
 }
 
 .dropdown-content button:hover {
-    background: rgba(26, 115, 232, 0.1);
+    background: rgba(37, 112, 211, 0.23);
 }
 
 /* Light mode overrides */

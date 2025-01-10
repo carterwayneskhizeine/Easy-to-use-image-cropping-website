@@ -222,7 +222,10 @@ class ImageEditor {
         // 下载图片
         document.getElementById('downloadImage').addEventListener('click', () => {
             const link = document.createElement('a');
-            link.download = 'cropped-image.png';
+            const now = new Date();
+            now.setHours(now.getHours() + 8); // 调整为北京时间
+            const formattedDate = now.toISOString().replace(/T/, '_').replace(/:/g, '-').split('.')[0];
+            link.download = `cropped_image_${formattedDate}`;
             link.href = this.canvas.toDataURL();
             link.click();
         });
@@ -503,6 +506,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const importImage = document.getElementById('importImage');
     const switchToEditor = document.getElementById('switchToEditor');
     const switchToCalculator = document.getElementById('switchToCalculator');
+    const languageToggle = document.getElementById('languageToggle');
     const editorPanel = document.getElementById('imageEditor');
     const calculatorPanel = document.getElementById('calculator');
 
@@ -525,6 +529,21 @@ window.addEventListener('DOMContentLoaded', () => {
         calculatorPanel.classList.add('active');
         editorPanel.classList.remove('active');
         importImage.style.display = 'none'; // 隐藏导入图片按钮
+    });
+
+    // 语言切换按钮点击事件
+    languageToggle.addEventListener('click', () => {
+        if (languageToggle.textContent === 'ZH') {
+            languageToggle.textContent = 'EN';
+            document.querySelectorAll('[data-lang-zh]').forEach(el => {
+                el.textContent = el.getAttribute('data-lang-en');
+            });
+        } else {
+            languageToggle.textContent = 'ZH';
+            document.querySelectorAll('[data-lang-zh]').forEach(el => {
+                el.textContent = el.getAttribute('data-lang-zh');
+            });
+        }
     });
 
     // 检查并恢复上次的主题设置
