@@ -635,4 +635,14 @@ body.en-mode #flipVertical {
     .ctrl-hint {
         display: block;
     }
+}
+
+body.light-mode .rotation-mode-toggle {
+    background-color: white;
+    color: var(--text-color-light);
+}
+
+body.light-mode .rotation-mode-toggle.active {
+    background-color: var(--primary-color);
+    color: white;
 } 
