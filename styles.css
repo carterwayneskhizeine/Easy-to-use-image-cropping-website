@@ -9,7 +9,7 @@
 }
 
 /* 移动端样式优化 */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 512px) {
     .container {
         padding: 10px;
     }
@@ -466,7 +466,7 @@ body.light-mode .calculator-hint {
 }
 
 /* 移动端适配 */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 512px) {
     .ratio-buttons {
         gap: 8px;
     }
@@ -606,7 +606,7 @@ body.en-mode #flipVertical {
 }
 
 /* 在移动设备上显示旋转模式按钮 */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 512px) {
     .rotation-mode-toggle {
         display: inline-block;
     }
@@ -631,7 +631,7 @@ body.en-mode #flipVertical {
 }
 
 /* 只在电脑上显示Ctrl旋转提示 */
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 512px) {
     .ctrl-hint {
         display: block;
     }
