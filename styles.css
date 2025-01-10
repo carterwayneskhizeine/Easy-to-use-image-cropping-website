@@ -406,6 +406,7 @@ body.light-mode .dropdown-content button {
 .calculator-hint {
     text-align: center;
     margin-top: 16px;
+    margin-bottom: 0;
     color: var(--text-color-dark);
     opacity: 0.8;
 }
@@ -473,9 +474,14 @@ body.light-mode .calculator-hint {
 .github-link {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
     color: var(--text-color-dark);
     transition: color 0.3s;
+    z-index: 100;
 }
 
 .github-link:hover {
