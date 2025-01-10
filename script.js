@@ -173,8 +173,15 @@ class ImageEditor {
         // 滚轮缩放
         this.canvas.addEventListener('wheel', (e) => {
             e.preventDefault();
+            const oldScale = this.scale;
             const delta = e.deltaY > 0 ? 0.9 : 1.1;
             this.scale *= delta;
+            
+            // 调整图片位置以保持画布中心缩放
+            const scaleRatio = this.scale / oldScale;
+            this.imageX *= scaleRatio;
+            this.imageY *= scaleRatio;
+            
             this.drawImage();
         });
 
@@ -224,13 +231,27 @@ class ImageEditor {
         });
 
         document.getElementById('zoomIn').addEventListener('click', () => {
-            this.scale += 1 / Math.max(this.image.width, this.image.height);
+            const oldScale = this.scale;
+            this.scale += 0.001;
+            
+            // 调整图片位置以保持画布中心缩放
+            const scaleRatio = this.scale / oldScale;
+            this.imageX *= scaleRatio;
+            this.imageY *= scaleRatio;
+            
             this.drawImage();
         });
 
         document.getElementById('zoomOut').addEventListener('click', () => {
-            this.scale -= 1 / Math.max(this.image.width, this.image.height);
+            const oldScale = this.scale;
+            this.scale -= 0.001;
             if (this.scale < 0.1) this.scale = 0.1;
+            
+            // 调整图片位置以保持画布中心缩放
+            const scaleRatio = this.scale / oldScale;
+            this.imageX *= scaleRatio;
+            this.imageY *= scaleRatio;
+            
             this.drawImage();
         });
 
