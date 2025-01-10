@@ -535,11 +535,13 @@ window.addEventListener('DOMContentLoaded', () => {
     languageToggle.addEventListener('click', () => {
         if (languageToggle.textContent === 'ZH') {
             languageToggle.textContent = 'EN';
+            document.body.classList.add('en-mode');
             document.querySelectorAll('[data-lang-zh]').forEach(el => {
                 el.textContent = el.getAttribute('data-lang-en');
             });
         } else {
             languageToggle.textContent = 'ZH';
+            document.body.classList.remove('en-mode');
             document.querySelectorAll('[data-lang-zh]').forEach(el => {
                 el.textContent = el.getAttribute('data-lang-zh');
             });

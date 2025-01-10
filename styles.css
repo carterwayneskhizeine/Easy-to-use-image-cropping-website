@@ -399,7 +399,7 @@ body.light-mode .dropdown-content button {
     border-radius: 20px;
     background: var(--bg-color-dark);
     color: var(--text-color-dark);
-    font-size: 16px;
+    font-size: 16px !important;
 }
 
 .calculator-hint {
@@ -497,4 +497,72 @@ body.light-mode .github-link:hover {
     padding: 10px;
     color: #ff4d4f;
     font-size: 14px;
+}
+
+/* 英文模式字体大小调整 */
+body.en-mode button,
+body.en-mode input,
+body.en-mode p,
+body.en-mode span,
+body.en-mode label {
+    font-size: 0.5em;
+}
+
+/* 保持原始字体大小的元素 */
+body.en-mode .canvas-info,
+body.en-mode .canvas-info span,
+body.en-mode #currentResolution,
+body.en-mode .drop-zone p,
+body.en-mode .calculator-container,
+body.en-mode .input-row label,
+body.en-mode .input-row input,
+body.en-mode .calculator-hint,
+body.en-mode .ratio-btn,
+body.en-mode #valueA,
+body.en-mode #valueB,
+body.en-mode #valueC,
+body.en-mode #valueD {
+    font-size: 16px !important;
+}
+
+/* 保持拖拽区域文字大小 */
+.drop-zone p {
+    font-size: 16px;
+}
+
+/* 保持画布信息文字大小 */
+.canvas-info {
+    font-size: 16px;
+}
+
+.canvas-info span {
+    font-size: 16px;
+}
+
+#currentResolution {
+    font-size: 16px;
+}
+
+body.en-mode .function-switch button {
+    font-size: 7px;
+}
+
+body.en-mode .dropdown-btn {
+    font-size: 7px;
+}
+
+body.en-mode .dropdown-content button {
+    font-size: 7px;
+}
+
+body.en-mode .control-group button {
+    font-size: 7px;
+}
+
+body.en-mode input[type="number"] {
+    font-size: 7px;
+}
+
+body.en-mode .wechat-browser-tip {
+    font-size: 7px;
 } 
