@@ -362,8 +362,14 @@ class ImageEditor {
                 } else {
                     // 缩放模式：双指缩放
                     if (this.lastTouchDistance > 0) {
+                        const oldScale = this.scale;
                         const scale = currentDistance / this.lastTouchDistance;
                         this.scale *= scale;
+                        
+                        // 调整图片位置以保持画布中心缩放
+                        const scaleRatio = this.scale / oldScale;
+                        this.imageX *= scaleRatio;
+                        this.imageY *= scaleRatio;
                     }
                 }
                 this.drawImage();
