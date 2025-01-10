@@ -18,6 +18,7 @@ class ImageEditor {
         this.imageX = 0;
         this.imageY = 0;
         this.lastTouchDistance = 0;
+        this.isRotationMode = false;
 
         this.initializeCanvas();
         this.setupEventListeners();
@@ -83,58 +84,90 @@ class ImageEditor {
 
         // 鼠标事件
         this.canvas.addEventListener('mousedown', (e) => {
-            this.isDragging = true;
-            const rect = this.canvas.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            // 考虑旋转角度的影响
-            const rotationRad = (this.rotation * Math.PI) / 180;
-            const cos = Math.cos(rotationRad);
-            const sin = Math.sin(rotationRad);
-            
-            // 保存起始点，考虑旋转和镜像的影响
-            this.startX = x * cos + y * sin;
-            this.startY = -x * sin + y * cos;
-            
-            // 考虑镜像的影响
-            this.startX *= this.flipX;
-            this.startY *= this.flipY;
-            
-            // 保存当前图片位置
-            this.lastImageX = this.imageX;
-            this.lastImageY = this.imageY;
+            if (e.ctrlKey) {
+                // Ctrl + 鼠标左键用于旋转
+                this.isDragging = true;
+                this.isRotating = true;
+                const rect = this.canvas.getBoundingClientRect();
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                this.startAngle = Math.atan2(
+                    e.clientY - rect.top - centerY,
+                    e.clientX - rect.left - centerX
+                );
+                this.lastRotation = this.rotation;
+            } else {
+                // 普通拖拽
+                this.isDragging = true;
+                this.isRotating = false;
+                const rect = this.canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                // 考虑旋转角度的影响
+                const rotationRad = (this.rotation * Math.PI) / 180;
+                const cos = Math.cos(rotationRad);
+                const sin = Math.sin(rotationRad);
+                
+                // 保存起始点，考虑旋转和镜像的影响
+                this.startX = x * cos + y * sin;
+                this.startY = -x * sin + y * cos;
+                
+                // 考虑镜像的影响
+                this.startX *= this.flipX;
+                this.startY *= this.flipY;
+                
+                // 保存当前图片位置
+                this.lastImageX = this.imageX;
+                this.lastImageY = this.imageY;
+            }
         });
 
         document.addEventListener('mousemove', (e) => {
             if (!this.isDragging) return;
             
-            const rect = this.canvas.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            // 考虑旋转角度的影响
-            const rotationRad = (this.rotation * Math.PI) / 180;
-            const cos = Math.cos(rotationRad);
-            const sin = Math.sin(rotationRad);
-            
-            // 计算当前点，考虑旋转和镜像的影响
-            const currentX = (x * cos + y * sin) * this.flipX;
-            const currentY = (-x * sin + y * cos) * this.flipY;
-            
-            // 计算位移
-            const deltaX = currentX - this.startX;
-            const deltaY = currentY - this.startY;
-            
-            // 更新图片位置
-            this.imageX = this.lastImageX + deltaX;
-            this.imageY = this.lastImageY + deltaY;
-            
-            this.drawImage();
+            if (this.isRotating) {
+                // 旋转模式
+                const rect = this.canvas.getBoundingClientRect();
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const currentAngle = Math.atan2(
+                    e.clientY - rect.top - centerY,
+                    e.clientX - rect.left - centerX
+                );
+                const angleDiff = (currentAngle - this.startAngle) * (180 / Math.PI);
+                this.rotation = this.lastRotation + angleDiff;
+                this.drawImage();
+            } else {
+                // 普通拖拽模式
+                const rect = this.canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                // 考虑旋转角度的影响
+                const rotationRad = (this.rotation * Math.PI) / 180;
+                const cos = Math.cos(rotationRad);
+                const sin = Math.sin(rotationRad);
+                
+                // 计算当前点，考虑旋转和镜像的影响
+                const currentX = (x * cos + y * sin) * this.flipX;
+                const currentY = (-x * sin + y * cos) * this.flipY;
+                
+                // 计算位移
+                const deltaX = currentX - this.startX;
+                const deltaY = currentY - this.startY;
+                
+                // 更新图片位置
+                this.imageX = this.lastImageX + deltaX;
+                this.imageY = this.lastImageY + deltaY;
+                
+                this.drawImage();
+            }
         });
 
         document.addEventListener('mouseup', () => {
             this.isDragging = false;
+            this.isRotating = false;
         });
 
         // 滚轮缩放
@@ -236,19 +269,36 @@ class ImageEditor {
             document.body.classList.toggle('light-mode');
         });
 
-        // 添加触摸事件支持
+        // 添加旋转模式切换按钮事件
+        const rotationModeToggle = document.getElementById('rotationModeToggle');
+        if (rotationModeToggle) {
+            rotationModeToggle.addEventListener('click', () => {
+                this.isRotationMode = !this.isRotationMode;
+                rotationModeToggle.classList.toggle('active');
+            });
+        }
+
+        // 修改触摸事件
         this.canvas.addEventListener('touchstart', (e) => {
             e.preventDefault();
             if (e.touches.length === 2) {
-                // 双指触摸，记录初始距离用于缩放
+                // 双指触摸，记录初始信息
                 const touch1 = e.touches[0];
                 const touch2 = e.touches[1];
                 this.lastTouchDistance = Math.hypot(
                     touch2.clientX - touch1.clientX,
                     touch2.clientY - touch1.clientY
                 );
+                if (this.isRotationMode) {
+                    // 在旋转模式下，记录初始角度
+                    this.startAngle = Math.atan2(
+                        touch2.clientY - touch1.clientY,
+                        touch2.clientX - touch1.clientX
+                    );
+                    this.lastRotation = this.rotation;
+                }
             } else if (e.touches.length === 1) {
-                // 单指触摸，用于移动
+                // 单指触摸逻辑保持不变
                 this.isDragging = true;
                 const touch = e.touches[0];
                 const rect = this.canvas.getBoundingClientRect();
@@ -273,7 +323,6 @@ class ImageEditor {
         this.canvas.addEventListener('touchmove', (e) => {
             e.preventDefault();
             if (e.touches.length === 2) {
-                // 双指缩放
                 const touch1 = e.touches[0];
                 const touch2 = e.touches[1];
                 const currentDistance = Math.hypot(
@@ -281,15 +330,25 @@ class ImageEditor {
                     touch2.clientY - touch1.clientY
                 );
 
-                if (this.lastTouchDistance > 0) {
-                    const scale = currentDistance / this.lastTouchDistance;
-                    this.scale *= scale;
-                    this.drawImage();
+                if (this.isRotationMode) {
+                    // 旋转模式：双指旋转
+                    const currentAngle = Math.atan2(
+                        touch2.clientY - touch1.clientY,
+                        touch2.clientX - touch1.clientX
+                    );
+                    const angleDiff = (currentAngle - this.startAngle) * (180 / Math.PI);
+                    this.rotation = this.lastRotation + angleDiff;
+                } else {
+                    // 缩放模式：双指缩放
+                    if (this.lastTouchDistance > 0) {
+                        const scale = currentDistance / this.lastTouchDistance;
+                        this.scale *= scale;
+                    }
                 }
-
+                this.drawImage();
                 this.lastTouchDistance = currentDistance;
             } else if (e.touches.length === 1 && this.isDragging) {
-                // 单指移动
+                // 单指移动逻辑保持不变
                 const touch = e.touches[0];
                 const rect = this.canvas.getBoundingClientRect();
                 const x = touch.clientX - rect.left;

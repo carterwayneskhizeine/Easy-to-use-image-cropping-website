@@ -24,11 +24,13 @@
                     <canvas id="canvas"></canvas>
                     <div id="drop-zone" class="drop-zone">
                         <p data-lang-zh="拖拽图片到此处或点击上传" data-lang-en="Drag image here or click to upload">拖拽图片到此处或点击上传</p>
-      <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                        <p class="ctrl-hint" data-lang-zh="按住Ctrl加鼠标左键旋转图片" data-lang-en="Hold Ctrl and left-click to rotate image">按住Ctrl加鼠标左键旋转图片</p>
+                        <input type="file" id="fileInput" accept="image/*" style="display: none;">
                     </div>
                 </div>
 
                 <div class="canvas-info">
+                    <button id="rotationModeToggle" class="rotation-mode-toggle" data-lang-zh="旋转模式" data-lang-en="Rotation Mode">旋转模式</button>
                     <p><span data-lang-zh="当前画布分辨率：" data-lang-en="Current Canvas Resolution:">当前画布分辨率：</span><span id="currentResolution">512 x 512</span></p>
                 </div>
 

@@ -100,6 +100,10 @@
         padding: 6px 12px;
         font-size: 14px;
     }
+
+    .rotation-mode-toggle {
+        display: inline-block;
+    }
 }
 
 /* 更小屏幕的优化 */
@@ -203,6 +207,7 @@ body.light-mode {
     width: 100%;
     height: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background: rgba(0, 0, 0, 0.5);
@@ -211,6 +216,8 @@ body.light-mode {
 }
 
 .canvas-info {
+    display: flex;
+    align-items: center;
     font-size: 16px;
     padding: 8px 16px;
     border-radius: 8px;
@@ -579,4 +586,53 @@ body.en-mode .wechat-browser-tip {
 body.en-mode #flipHorizontal,
 body.en-mode #flipVertical {
     font-size: 0.5em;
+}
+
+.rotation-mode-toggle {
+    display: none; /* 默认在电脑上隐藏 */
+    padding: 4px 8px;
+    margin-right: 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    background-color: var(--surface-color-dark);
+    color: var(--text-color-dark);
+    border: 1px solid var(--primary-color);
+    cursor: pointer;
+}
+
+.rotation-mode-toggle.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* 在移动设备上显示旋转模式按钮 */
+@media screen and (max-width: 768px) {
+    .rotation-mode-toggle {
+        display: inline-block;
+    }
+}
+
+.canvas-info {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: var(--surface-color-dark);
+    margin: 0;
+    width: fit-content;
+}
+
+.ctrl-hint {
+    display: none;
+    font-size: 12px;
+    color: white;
+    margin-top: 4px;
+}
+
+/* 只在电脑上显示Ctrl旋转提示 */
+@media screen and (min-width: 769px) {
+    .ctrl-hint {
+        display: block;
+    }
 } 
