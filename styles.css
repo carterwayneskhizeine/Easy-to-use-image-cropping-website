@@ -21,7 +21,7 @@
 
     .canvas-wrapper {
         gap: 8px;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
     }
 
     .canvas-info {
@@ -161,7 +161,7 @@ body.light-mode {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -171,8 +171,8 @@ body.light-mode {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
+    gap: 8px;
+    margin-bottom: 10px;
     width: 100%;
 }
 
@@ -326,8 +326,8 @@ body.light-mode .dropdown-content button {
 
 .function-switch {
     display: flex;
-    gap: 12px;
-    margin-bottom: 20px;
+    gap: 8px;
+    margin-bottom: 10px;
     justify-content: center;
 }
 
@@ -339,6 +339,7 @@ body.light-mode .dropdown-content button {
     color: var(--text-color-dark);
     cursor: pointer;
     transition: background-color 0.2s;
+    font-size: 10px;
 }
 
 .function-switch button.active {
@@ -495,7 +496,7 @@ body.light-mode .github-link:hover {
     text-align: center;
     margin-top: 20px;
     padding: 10px;
-    color: #ff4d4f;
+    color: #ffffff;
     font-size: 14px;
 }
 
@@ -565,4 +566,9 @@ body.en-mode input[type="number"] {
 
 body.en-mode .wechat-browser-tip {
     font-size: 7px;
+}
+
+body.en-mode #flipHorizontal,
+body.en-mode #flipVertical {
+    font-size: 0.5em;
 } 
