@@ -63,7 +63,7 @@ class ImageEditor {
     }
 
     setupEventListeners() {
-        // 文件拖放
+        // 文件拖放到 drop-zone
         const dropZone = document.getElementById('drop-zone');
         const fileInput = document.getElementById('fileInput');
 
@@ -74,6 +74,20 @@ class ImageEditor {
             e.stopPropagation();
         });
         dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                this.loadImage(file);
+            }
+        });
+
+        // ！！！ 新增：允许将图片拖拽到 canvas 本身以替换当前图片 ！！！
+        this.canvas.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+        });
+        this.canvas.addEventListener('drop', (e) => {
             e.preventDefault();
             e.stopPropagation();
             const file = e.dataTransfer.files[0];
@@ -429,6 +443,8 @@ class ImageEditor {
                 this.imageX = 0;
                 this.imageY = 0;
                 this.fitImageToCanvas();
+                
+                // 隐藏 drop-zone（只在首次加载/替换后隐藏）
                 document.getElementById('drop-zone').style.display = 'none';
             };
             img.src = e.target.result;
@@ -643,4 +659,4 @@ window.addEventListener('DOMContentLoaded', () => {
         document.body.classList.remove('dark-mode');
         document.body.classList.add('light-mode');
     }
-}); 
+});
