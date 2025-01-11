@@ -88,8 +88,8 @@
 
     /* 调整下拉菜单位置 */
     .dropdown-content {
-        left: 50%;
-        transform: translateX(-50%);
+        left: 0;
+        transform: none;
     }
 
     .ratio-buttons {
@@ -675,5 +675,36 @@ body.en-mode .dropdown-content button {
     .dropdown-btn,
     .dropdown-content button {
         font-size: 12px;
+    }
+}
+
+/* 为Res按钮的下拉菜单设置 */
+.button-row .dropdown:first-child .dropdown-content {
+    left: 0;
+    right: auto;
+    transform: none;
+}
+
+/* 为AR按钮的下拉菜单设置 */
+.button-row .dropdown:last-child .dropdown-content {
+    right: 0;
+    left: auto;
+    transform: none;
+}
+
+/* 移动端适配 */
+@media screen and (max-width: 512px) {
+    /* 为Res按钮的下拉菜单设置 */
+    .button-row .dropdown:first-child .dropdown-content {
+        left: 0;
+        right: auto;
+        transform: none;
+    }
+
+    /* 为AR按钮的下拉菜单设置 */
+    .button-row .dropdown:last-child .dropdown-content {
+        right: 0;
+        left: auto;
+        transform: none;
     }
 } 
