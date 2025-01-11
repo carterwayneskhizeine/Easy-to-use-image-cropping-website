@@ -188,7 +188,7 @@ class ImageEditor {
         this.canvas.addEventListener('wheel', (e) => {
             e.preventDefault();
             const oldScale = this.scale;
-            const delta = e.deltaY > 0 ? 0.9 : 1.1;
+            const delta = e.deltaY > 0 ? 0.99 : 1.01;
             this.scale *= delta;
             
             // 调整图片位置以保持画布中心缩放
