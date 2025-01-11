@@ -29,15 +29,9 @@
                     </div>
                 </div>
 
-                <div class="canvas-info">
-                    <button id="rotationModeToggle" class="rotation-mode-toggle" data-lang-zh="旋转模式" data-lang-en="Rotation Mode">旋转模式</button>
-                    <p><span data-lang-zh="当前画布分辨率：" data-lang-en="Current Canvas Resolution:">当前画布分辨率：</span><span id="currentResolution">512 x 512</span></p>
-                </div>
-
-                <div class="preset-controls">
-                    <button id="flipHorizontal" data-lang-zh="水平镜像" data-lang-en="Flip Horizontal">水平镜像</button>
+                <div class="button-row">
                     <div class="dropdown">
-                        <button class="dropdown-btn" data-lang-zh="预设分辨率" data-lang-en="Preset Resolutions">预设分辨率</button>
+                        <button class="dropdown-btn" data-lang-zh="Res" data-lang-en="Res">Res</button>
                         <div class="dropdown-content">
                             <button data-resolution="512">512 x 512</button>
                             <button data-resolution="1024">1024 x 1024</button>
@@ -45,38 +39,41 @@
                             <button data-resolution-width="1280" data-resolution-height="720">1280 x 720</button>
                         </div>
                     </div>
-
+                    <button id="rotateLeft" class="icon-button"><img src="icon/Rotate_Left.svg" alt="Rotate Left"></button>
+                    <button id="rotateRight" class="icon-button"><img src="icon/Rotate_Right.svg" alt="Rotate Right"></button>
+                    <button id="flipHorizontal" class="icon-button"><img src="icon/Horizontal_Flip.svg" alt="Horizontal Flip"></button>
+                    <button id="flipVertical" class="icon-button"><img src="icon/Vertical_Flip.svg" alt="Vertical Flip"></button>
+                    <button id="zoomIn" class="icon-button"><img src="icon/Zoom_In.svg" alt="Zoom In"></button>
+                    <button id="zoomOut" class="icon-button"><img src="icon/Zoom_Out.svg" alt="Zoom Out"></button>
                     <div class="dropdown">
-                        <button class="dropdown-btn" data-lang-zh="宽高比" data-lang-en="Aspect Ratio">宽高比</button>
+                        <button class="dropdown-btn" data-lang-zh="AR" data-lang-en="AR">AR</button>
                         <div class="dropdown-content">
                             <button data-aspect="16:9">16:9</button>
                             <button data-aspect="9:16">9:16</button>
                             <button data-aspect="4:3">4:3</button>
                             <button data-aspect="1:1">1:1</button>
                         </div>
-      </div>
-                    <button id="flipVertical" data-lang-zh="垂直镜像" data-lang-en="Flip Vertical">垂直镜像</button>
-        </div>
+                    </div>
+                </div>
+
+                <div class="canvas-info">
+                    <button id="rotationModeToggle" class="rotation-mode-toggle" data-lang-zh="旋转模式" data-lang-en="Rotation Mode">旋转模式</button>
+                    <p><span data-lang-zh="当前画布分辨率：" data-lang-en="Current Canvas Resolution:">当前画布分辨率：</span><span id="currentResolution">512 x 512</span></p>
+                </div>
 
                 <div class="control-panel">
                     <div class="control-group">
                         <input type="number" id="widthInput" placeholder="宽度" value="512">
                         <input type="number" id="heightInput" placeholder="高度" value="384">
                         <button id="setResolution" data-lang-zh="设置分辨率" data-lang-en="Set Resolution">设置分辨率</button>
-        </div>
-
-                    <div class="control-group">
-                        <button id="rotateLeft" data-lang-zh="左旋" data-lang-en="Rotate Left">左旋</button>
-                        <button id="rotateRight" data-lang-zh="右旋" data-lang-en="Rotate Right">右旋</button>
-                        <button id="zoomIn" data-lang-zh="放大" data-lang-en="Zoom In">放大</button>
-                        <button id="zoomOut" data-lang-zh="缩小" data-lang-en="Zoom Out">缩小</button>
-        </div>
+                    </div>
 
                     <div class="control-group">
                         <button id="copyToClipboard" data-lang-zh="复制到剪贴板" data-lang-en="Copy to Clipboard">复制到剪贴板</button>
                         <button id="downloadImage" data-lang-zh="下载图片" data-lang-en="Download Image">下载图片</button>
-                        <button id="toggleTheme" data-lang-zh="切换主题" data-lang-en="Toggle Theme">切换主题</button>
-        </div>
+                        <button id="toggleTheme" data-lang-zh="主题" data-lang-en="Theme">主题</button>
+                    </div>
+                </div>
         </div>
         <!-- 添加微信浏览器提示 -->
         <div id="wechatBrowserTip" class="wechat-browser-tip" style="display: none;" data-lang-zh="请使用浏览器打开使用完整功能" data-lang-en="Please use a browser to access full features">
