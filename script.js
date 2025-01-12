@@ -293,7 +293,8 @@ class ImageEditor {
             const now = new Date();
             now.setHours(now.getHours() + 8); // 调整为北京时间
             const formattedDate = now.toISOString().replace(/T/, '_').replace(/:/g, '-').split('.')[0];
-            link.download = `cropped_image_${formattedDate}`;
+            const resolution = `${this.canvas.width}-${this.canvas.height}`;
+            link.download = `cropped_${resolution}_${formattedDate}`;
             link.href = this.canvas.toDataURL();
             link.click();
         });
