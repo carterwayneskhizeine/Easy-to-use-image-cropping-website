@@ -38,10 +38,10 @@ class ImageEditor {
         const maxDisplaySize = isMobileDevice() ? 384 : 512;
         const aspectRatio = width / height;
         const container = this.canvas.parentElement;
-
-        // 设置容器的宽高比（在部分浏览器中能保持比例）
+        
+        // 设置容器的宽高比
         container.style.aspectRatio = `${width} / ${height}`;
-
+        
         // 根据宽高比调整显示大小
         if (width > height) {
             const displayWidth = Math.min(width, maxDisplaySize);
@@ -82,7 +82,7 @@ class ImageEditor {
             }
         });
 
-        // 允许将图片拖拽到 canvas 本身以替换当前图片
+        // ！！！ 新增：允许将图片拖拽到 canvas 本身以替换当前图片 ！！！
         this.canvas.addEventListener('dragover', (e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -118,18 +118,19 @@ class ImageEditor {
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
                 
+                // 考虑旋转角度的影响
                 const rotationRad = (this.rotation * Math.PI) / 180;
                 const cos = Math.cos(rotationRad);
                 const sin = Math.sin(rotationRad);
-
+                
                 // 保存起始点，考虑旋转和镜像的影响
                 this.startX = x * cos + y * sin;
                 this.startY = -x * sin + y * cos;
-
+                
                 // 考虑镜像的影响
                 this.startX *= this.flipX;
                 this.startY *= this.flipY;
-
+                
                 // 保存当前图片位置
                 this.lastImageX = this.imageX;
                 this.lastImageY = this.imageY;
@@ -138,7 +139,7 @@ class ImageEditor {
 
         document.addEventListener('mousemove', (e) => {
             if (!this.isDragging) return;
-
+            
             if (this.isRotating) {
                 // 旋转模式
                 const rect = this.canvas.getBoundingClientRect();
@@ -156,20 +157,24 @@ class ImageEditor {
                 const rect = this.canvas.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-
+                
+                // 考虑旋转角度的影响
                 const rotationRad = (this.rotation * Math.PI) / 180;
                 const cos = Math.cos(rotationRad);
                 const sin = Math.sin(rotationRad);
-
+                
+                // 计算当前点，考虑旋转和镜像的影响
                 const currentX = (x * cos + y * sin) * this.flipX;
                 const currentY = (-x * sin + y * cos) * this.flipY;
-
+                
+                // 计算位移
                 const deltaX = currentX - this.startX;
                 const deltaY = currentY - this.startY;
-
+                
+                // 更新图片位置
                 this.imageX = this.lastImageX + deltaX;
                 this.imageY = this.lastImageY + deltaY;
-
+                
                 this.drawImage();
             }
         });
@@ -198,9 +203,11 @@ class ImageEditor {
         document.querySelectorAll('[data-resolution], [data-resolution-width]').forEach(button => {
             button.addEventListener('click', () => {
                 if (button.dataset.resolution) {
+                    // 正方形分辨率
                     const size = parseInt(button.dataset.resolution);
                     this.setCanvasSize(size, size);
                 } else {
+                    // 自定义宽高比分辨率
                     const width = parseInt(button.dataset.resolutionWidth);
                     const height = parseInt(button.dataset.resolutionHeight);
                     this.setCanvasSize(width, height);
@@ -240,9 +247,12 @@ class ImageEditor {
         document.getElementById('zoomIn').addEventListener('click', () => {
             const oldScale = this.scale;
             this.scale += 0.001;
+            
+            // 调整图片位置以保持画布中心缩放
             const scaleRatio = this.scale / oldScale;
             this.imageX *= scaleRatio;
             this.imageY *= scaleRatio;
+            
             this.drawImage();
         });
 
@@ -250,9 +260,12 @@ class ImageEditor {
             const oldScale = this.scale;
             this.scale -= 0.001;
             if (this.scale < 0.1) this.scale = 0.1;
+            
+            // 调整图片位置以保持画布中心缩放
             const scaleRatio = this.scale / oldScale;
             this.imageX *= scaleRatio;
             this.imageY *= scaleRatio;
+            
             this.drawImage();
         });
 
@@ -274,11 +287,11 @@ class ImageEditor {
             });
         });
 
-        // 下载 PNG
+        // 下载图片
         document.getElementById('downloadPNG').addEventListener('click', () => {
             const link = document.createElement('a');
             const now = new Date();
-            now.setHours(now.getHours() + 8);
+            now.setHours(now.getHours() + 8); // 调整为北京时间
             const formattedDate = now.toISOString().replace(/T/, '_').replace(/:/g, '-').split('.')[0];
             const resolution = `${this.canvas.width}-${this.canvas.height}`;
             link.download = `cropped_${resolution}_${formattedDate}.png`;
@@ -286,11 +299,10 @@ class ImageEditor {
             link.click();
         });
 
-        // 下载 JPG
         document.getElementById('downloadJPG').addEventListener('click', () => {
             const link = document.createElement('a');
             const now = new Date();
-            now.setHours(now.getHours() + 8);
+            now.setHours(now.getHours() + 8); // 调整为北京时间
             const formattedDate = now.toISOString().replace(/T/, '_').replace(/:/g, '-').split('.')[0];
             const resolution = `${this.canvas.width}-${this.canvas.height}`;
             link.download = `cropped_${resolution}_${formattedDate}.jpg`;
@@ -304,7 +316,7 @@ class ImageEditor {
             document.body.classList.toggle('light-mode');
         });
 
-        // 旋转模式切换按钮
+        // 添加旋转模式切换按钮事件
         const rotationModeToggle = document.getElementById('rotationModeToggle');
         if (rotationModeToggle) {
             rotationModeToggle.addEventListener('click', () => {
@@ -313,10 +325,11 @@ class ImageEditor {
             });
         }
 
-        // 触摸事件
+        // 修改触摸事件
         this.canvas.addEventListener('touchstart', (e) => {
             e.preventDefault();
             if (e.touches.length === 2) {
+                // 双指触摸，记录初始信息
                 const touch1 = e.touches[0];
                 const touch2 = e.touches[1];
                 this.lastTouchDistance = Math.hypot(
@@ -324,6 +337,7 @@ class ImageEditor {
                     touch2.clientY - touch1.clientY
                 );
                 if (this.isRotationMode) {
+                    // 在旋转模式下，记录初始角度
                     this.startAngle = Math.atan2(
                         touch2.clientY - touch1.clientY,
                         touch2.clientX - touch1.clientX
@@ -331,22 +345,23 @@ class ImageEditor {
                     this.lastRotation = this.rotation;
                 }
             } else if (e.touches.length === 1) {
+                // 单指触摸逻辑保持不变
                 this.isDragging = true;
                 const touch = e.touches[0];
                 const rect = this.canvas.getBoundingClientRect();
                 const x = touch.clientX - rect.left;
                 const y = touch.clientY - rect.top;
-
+                
                 const rotationRad = (this.rotation * Math.PI) / 180;
                 const cos = Math.cos(rotationRad);
                 const sin = Math.sin(rotationRad);
-
+                
                 this.startX = x * cos + y * sin;
                 this.startY = -x * sin + y * cos;
-
+                
                 this.startX *= this.flipX;
                 this.startY *= this.flipY;
-
+                
                 this.lastImageX = this.imageX;
                 this.lastImageY = this.imageY;
             }
@@ -361,8 +376,9 @@ class ImageEditor {
                     touch2.clientX - touch1.clientX,
                     touch2.clientY - touch1.clientY
                 );
+
                 if (this.isRotationMode) {
-                    // 旋转模式
+                    // 旋转模式：双指旋转
                     const currentAngle = Math.atan2(
                         touch2.clientY - touch1.clientY,
                         touch2.clientX - touch1.clientX
@@ -370,12 +386,13 @@ class ImageEditor {
                     const angleDiff = (currentAngle - this.startAngle) * (180 / Math.PI);
                     this.rotation = this.lastRotation + angleDiff;
                 } else {
-                    // 缩放模式
+                    // 缩放模式：双指缩放
                     if (this.lastTouchDistance > 0) {
                         const oldScale = this.scale;
                         const scale = currentDistance / this.lastTouchDistance;
                         this.scale *= scale;
-
+                        
+                        // 调整图片位置以保持画布中心缩放
                         const scaleRatio = this.scale / oldScale;
                         this.imageX *= scaleRatio;
                         this.imageY *= scaleRatio;
@@ -384,24 +401,25 @@ class ImageEditor {
                 this.drawImage();
                 this.lastTouchDistance = currentDistance;
             } else if (e.touches.length === 1 && this.isDragging) {
+                // 单指移动逻辑保持不变
                 const touch = e.touches[0];
                 const rect = this.canvas.getBoundingClientRect();
                 const x = touch.clientX - rect.left;
                 const y = touch.clientY - rect.top;
-
+                
                 const rotationRad = (this.rotation * Math.PI) / 180;
                 const cos = Math.cos(rotationRad);
                 const sin = Math.sin(rotationRad);
-
+                
                 const currentX = (x * cos + y * sin) * this.flipX;
                 const currentY = (-x * sin + y * cos) * this.flipY;
-
+                
                 const deltaX = currentX - this.startX;
                 const deltaY = currentY - this.startY;
-
+                
                 this.imageX = this.lastImageX + deltaX;
                 this.imageY = this.lastImageY + deltaY;
-
+                
                 this.drawImage();
             }
         });
@@ -415,48 +433,6 @@ class ImageEditor {
             this.isDragging = false;
             this.lastTouchDistance = 0;
         });
-
-        // ======= 粘贴图片功能改动处 START =======
-        document.getElementById('pasteImage').addEventListener('click', async () => {
-            try {
-                // 部分浏览器（如 Chrome）可能要求先通过 permissions API 判断一下
-                if (navigator.permissions && navigator.permissions.query) {
-                    const permissionStatus = await navigator.permissions.query({
-                        name: 'clipboard-read',
-                    });
-                    // 如果状态不是 granted 或 prompt，说明无法继续读取
-                    if (permissionStatus.state !== 'granted' && permissionStatus.state !== 'prompt') {
-                        console.warn('没有剪贴板读取权限');
-                        return;
-                    }
-                }
-
-                // 读取剪贴板内容
-                const clipboardItems = await navigator.clipboard.read();
-                
-                // 遍历所有剪贴板项目
-                for (const item of clipboardItems) {
-                    // 遍历该项目的所有类型
-                    for (const type of item.types) {
-                        // 如果类型以 'image/' 开头，说明是图片
-                        if (type.startsWith('image/')) {
-                            // 获取该类型对应的 Blob
-                            const blob = await item.getType(type);
-                            // 把 Blob 转成 File，再调用 loadImage
-                            const file = new File([blob], 'clipboard-image', { type: blob.type });
-                            this.loadImage(file);
-                            // 找到第一张图片就结束，不再继续
-                            return;
-                        }
-                    }
-                }
-                // 如果运行到这里，说明剪贴板里没有 image/* 类型
-                console.warn('剪贴板里没有检测到图片类型');
-            } catch (error) {
-                console.error('读取剪贴板出错: ', error);
-            }
-        });
-        // ======= 粘贴图片功能改动处 END ======= 
     }
 
     handleFileSelect(e) {
@@ -479,7 +455,7 @@ class ImageEditor {
                 this.imageX = 0;
                 this.imageY = 0;
                 this.fitImageToCanvas();
-
+                
                 // 隐藏 drop-zone（只在首次加载/替换后隐藏）
                 document.getElementById('drop-zone').style.display = 'none';
             };
@@ -511,11 +487,11 @@ class ImageEditor {
 
         // 移动到画布中心
         this.ctx.translate(this.canvas.width / 2, this.canvas.height / 2);
-
+        
         // 应用变换
         this.ctx.rotate((this.rotation * Math.PI) / 180);
         this.ctx.scale(this.scale * this.flipX, this.scale * this.flipY);
-
+        
         // 绘制图片
         this.ctx.drawImage(
             this.image,
@@ -532,6 +508,7 @@ class ImageEditor {
 // 在文件开头添加比例计算器类
 class ProportionCalculator {
     constructor() {
+        // 根据设备类型设置不同的默认值
         if (isMobileDevice()) {
             document.getElementById('valueC').value = '384';
             document.getElementById('valueD').value = '288';
@@ -539,7 +516,7 @@ class ProportionCalculator {
         // A和B的值保持4:3不变
         document.getElementById('valueA').value = '4';
         document.getElementById('valueB').value = '3';
-
+        
         this.setupEventListeners();
         // 初始化时就计算一次
         this.calculateFromC();
@@ -552,20 +529,20 @@ class ProportionCalculator {
             this.calculateFromC();
             this.updateCropResolution();
         });
-
+        
         document.getElementById('valueD').addEventListener('input', () => {
             this.calculateFromD();
             this.updateCropResolution();
         });
-
-        // 比例按钮
+        
+        // 添加比例按钮点击事件
         document.querySelectorAll('.ratio-btn').forEach(button => {
             button.addEventListener('click', (e) => {
                 const ratio = e.target.dataset.ratio;
                 const [a, b] = ratio.split(':').map(Number);
                 document.getElementById('valueA').value = a;
                 document.getElementById('valueB').value = b;
-                // 清空 C 和 D
+                // 清空 C 和 D 的值
                 document.getElementById('valueC').value = '';
                 document.getElementById('valueD').value = '';
             });
@@ -576,14 +553,16 @@ class ProportionCalculator {
         const a = parseFloat(document.getElementById('valueA').value);
         const b = parseFloat(document.getElementById('valueB').value);
         const c = parseFloat(document.getElementById('valueC').value);
-
-        if (isNaN(a) || isNaN(b) || isNaN(c)) {
+        
+        if(isNaN(a) || isNaN(b) || isNaN(c)) {
             return;
         }
-        if (b === 0 || a === 0) {
+        
+        if(b === 0 || a === 0) {
             alert('分母不能为0！');
             return;
         }
+        
         const d = Math.round((b * c) / a);
         document.getElementById('valueD').value = d;
     }
@@ -592,24 +571,27 @@ class ProportionCalculator {
         const a = parseFloat(document.getElementById('valueA').value);
         const b = parseFloat(document.getElementById('valueB').value);
         const d = parseFloat(document.getElementById('valueD').value);
-
-        if (isNaN(a) || isNaN(b) || isNaN(d)) {
+        
+        if(isNaN(a) || isNaN(b) || isNaN(d)) {
             return;
         }
-        if (b === 0 || a === 0) {
+        
+        if(b === 0 || a === 0) {
             alert('分母不能为0！');
             return;
         }
+        
         const c = Math.round((a * d) / b);
         document.getElementById('valueC').value = c;
     }
 
+    // 添加新方法：更新裁剪界面的分辨率输入框
     updateCropResolution() {
         const widthInput = document.getElementById('widthInput');
         const heightInput = document.getElementById('heightInput');
         const valueC = document.getElementById('valueC').value;
         const valueD = document.getElementById('valueD').value;
-
+        
         if (valueC && valueD) {
             widthInput.value = valueC;
             heightInput.value = valueD;
@@ -619,11 +601,13 @@ class ProportionCalculator {
 
 // 在文件末尾添加功能切换逻辑
 window.addEventListener('DOMContentLoaded', () => {
+    // 检测是否是微信浏览器
     function isWechatBrowser() {
         const ua = navigator.userAgent.toLowerCase();
         return /micromessenger/.test(ua) && /mobile/.test(ua);
     }
 
+    // 显示或隐藏微信浏览器提示
     const wechatBrowserTip = document.getElementById('wechatBrowserTip');
     if (isWechatBrowser()) {
         wechatBrowserTip.style.display = 'block';
@@ -632,6 +616,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const imageEditor = new ImageEditor();
     const calculator = new ProportionCalculator();
 
+    // 功能切换按钮
     const importImage = document.getElementById('importImage');
     const switchToEditor = document.getElementById('switchToEditor');
     const switchToCalculator = document.getElementById('switchToCalculator');
@@ -639,7 +624,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const editorPanel = document.getElementById('imageEditor');
     const calculatorPanel = document.getElementById('calculator');
 
-    // 导入图片
+    // 导入图片按钮点击事件
     importImage.addEventListener('click', () => {
         document.getElementById('fileInput').click();
     });
@@ -660,7 +645,7 @@ window.addEventListener('DOMContentLoaded', () => {
         importImage.style.display = 'none'; // 隐藏导入图片按钮
     });
 
-    // 语言切换
+    // 语言切换按钮点击事件
     languageToggle.addEventListener('click', () => {
         if (languageToggle.textContent === 'ZH') {
             languageToggle.textContent = 'EN';
@@ -677,7 +662,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // 主题本地存储
+    // 检查并恢复上次的主题设置
     const isDarkMode = localStorage.getItem('darkMode') === 'true';
     if (isDarkMode) {
         document.body.classList.add('dark-mode');
