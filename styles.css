@@ -707,4 +707,16 @@ body.en-mode .dropdown-content button {
         left: auto;
         transform: none;
     }
+}
+
+/* 为下载图片按钮的下拉菜单特别设置 */
+.control-group .dropdown .dropdown-content {
+    top: 100%;
+    bottom: auto;
+}
+
+/* 确保其他下拉菜单不受影响 */
+.button-row .dropdown .dropdown-content {
+    top: 100%;
+    bottom: auto;
 } 

@@ -288,14 +288,25 @@ class ImageEditor {
         });
 
         // 下载图片
-        document.getElementById('downloadImage').addEventListener('click', () => {
+        document.getElementById('downloadPNG').addEventListener('click', () => {
             const link = document.createElement('a');
             const now = new Date();
             now.setHours(now.getHours() + 8); // 调整为北京时间
             const formattedDate = now.toISOString().replace(/T/, '_').replace(/:/g, '-').split('.')[0];
             const resolution = `${this.canvas.width}-${this.canvas.height}`;
-            link.download = `cropped_${resolution}_${formattedDate}`;
-            link.href = this.canvas.toDataURL();
+            link.download = `cropped_${resolution}_${formattedDate}.png`;
+            link.href = this.canvas.toDataURL('image/png');
+            link.click();
+        });
+
+        document.getElementById('downloadJPG').addEventListener('click', () => {
+            const link = document.createElement('a');
+            const now = new Date();
+            now.setHours(now.getHours() + 8); // 调整为北京时间
+            const formattedDate = now.toISOString().replace(/T/, '_').replace(/:/g, '-').split('.')[0];
+            const resolution = `${this.canvas.width}-${this.canvas.height}`;
+            link.download = `cropped_${resolution}_${formattedDate}.jpg`;
+            link.href = this.canvas.toDataURL('image/jpeg', 0.9);
             link.click();
         });
 

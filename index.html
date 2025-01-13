@@ -35,9 +35,9 @@
                         <div class="dropdown-content">
                             <button data-resolution="512">512 x 512</button>
                             <button data-resolution-width="512" data-resolution-height="288">512 x 288</button>
+                            <button data-resolution-width="768" data-resolution-height="512">768 x 512</button>
                             <button data-resolution="1024">1024 x 1024</button>
                             <button data-resolution-width="1024" data-resolution-height="576">1024 x 576</button>
-                            <button data-resolution-width="1280" data-resolution-height="720">1280 x 720</button>
                         </div>
                     </div>
                     <button id="rotateLeft" class="icon-button"><img src="icon/Rotate_Left.svg" alt="Rotate Left"></button>
@@ -67,12 +67,18 @@
                     <div class="control-group">
                         <input type="number" id="widthInput" placeholder="宽度" value="512">
                         <input type="number" id="heightInput" placeholder="高度" value="384">
-                        <button id="setResolution" data-lang-zh="设置分辨率" data-lang-en="Set Resolution">设置分辨率</button>
+                        <button id="setResolution" data-lang-zh="设置" data-lang-en="Set">设置</button>
                     </div>
 
                     <div class="control-group">
                         <button id="copyToClipboard" data-lang-zh="复制到剪贴板" data-lang-en="Copy to Clipboard">复制到剪贴板</button>
-                        <button id="downloadImage" data-lang-zh="下载图片" data-lang-en="Download Image">下载图片</button>
+                        <div class="dropdown">
+                            <button id="downloadImage" data-lang-zh="下载图片" data-lang-en="Download Image">下载图片</button>
+                            <div class="dropdown-content">
+                                <button id="downloadPNG" data-lang-zh="PNG格式" data-lang-en="PNG Format">PNG格式</button>
+                                <button id="downloadJPG" data-lang-zh="JPG格式" data-lang-en="JPG Format">JPG格式</button>
+                            </div>
+                        </div>
                         <button id="toggleTheme" data-lang-zh="主题" data-lang-en="Theme">主题</button>
                     </div>
                 </div>
