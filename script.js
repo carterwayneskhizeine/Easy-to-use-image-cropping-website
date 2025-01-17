@@ -35,7 +35,8 @@ class ImageEditor {
 
     setCanvasSize(width, height) {
         // 根据设备类型设置不同的最大显示尺寸
-        const maxDisplaySize = isMobileDevice() ? 384 : 512;
+        const maxDisplayWidth = isMobileDevice() ? 384 : 720;
+        const maxDisplayHeight = isMobileDevice() ? 288 : 405;
         const aspectRatio = width / height;
         const container = this.canvas.parentElement;
         
@@ -44,12 +45,12 @@ class ImageEditor {
         
         // 根据宽高比调整显示大小
         if (width > height) {
-            const displayWidth = Math.min(width, maxDisplaySize);
+            const displayWidth = Math.min(width, maxDisplayWidth);
             const displayHeight = displayWidth / aspectRatio;
             container.style.width = displayWidth + 'px';
             container.style.height = displayHeight + 'px';
         } else {
-            const displayHeight = Math.min(height, maxDisplaySize);
+            const displayHeight = Math.min(height, maxDisplayHeight);
             const displayWidth = displayHeight * aspectRatio;
             container.style.width = displayWidth + 'px';
             container.style.height = displayHeight + 'px';

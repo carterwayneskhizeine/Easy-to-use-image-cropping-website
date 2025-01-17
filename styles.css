@@ -205,7 +205,7 @@ body.light-mode {
 
 .canvas-container {
     position: relative;
-    max-width: 512px;
+    max-width: 720px;
     width: 100%;
     aspect-ratio: auto;
     border-radius: 12px;
