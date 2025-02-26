@@ -280,6 +280,24 @@ class ImageEditor {
             this.drawImage();
         });
 
+        // 添加适应高度按钮功能
+        document.getElementById('fitHeight').addEventListener('click', () => {
+            if (!this.image) return;
+            
+            // 计算图片需要的缩放比例，使其高度与画布高度匹配
+            const heightRatio = this.canvas.height / this.image.height;
+            
+            // 设置新的缩放比例
+            this.scale = heightRatio;
+            
+            // 重置图片位置到中心
+            this.imageX = 0;
+            this.imageY = 0;
+            
+            // 重新绘制画布
+            this.drawImage();
+        });
+
         // 复制到剪贴板
         document.getElementById('copyToClipboard').addEventListener('click', () => {
             this.canvas.toBlob(blob => {
