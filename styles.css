@@ -279,12 +279,13 @@ button {
     color: white;
     cursor: pointer;
     font-size: 14px;
-    transition: background-color 0.2s, transform 0.1s;
+    transition: background-color 0.2s, transform 0.1s, box-shadow 0.3s;
     white-space: nowrap;
 }
 
 button:hover {
     background: #1557b0;
+    box-shadow: 0 0 20px rgba(77, 118, 174, 0.6), 0 0 40px rgba(77, 118, 174, 0.3);
 }
 
 button:active {
