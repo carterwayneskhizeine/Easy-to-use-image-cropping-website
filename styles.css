@@ -285,7 +285,7 @@ button {
 
 button:hover {
     background: #1557b0;
-    box-shadow: 0 0 20px rgba(77, 118, 174, 0.6), 0 0 40px rgba(77, 118, 174, 0.3);
+    box-shadow: 0 0 20px rgba(10, 25, 41, 0.6), 0 0 40px rgba(10, 25, 41, 0.3);
 }
 
 button:active {
