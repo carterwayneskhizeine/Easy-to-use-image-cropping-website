@@ -653,7 +653,7 @@ window.addEventListener('DOMContentLoaded', () => {
         switchToCalculator.classList.remove('active');
         editorPanel.classList.add('active');
         calculatorPanel.classList.remove('active');
-        importImage.style.display = 'inline-block'; // 显示导入图片按钮
+        // importImage.style.display = 'inline-block'; // 显示导入图片按钮 - 已注释
     });
 
     switchToCalculator.addEventListener('click', () => {

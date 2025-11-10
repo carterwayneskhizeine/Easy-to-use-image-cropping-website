@@ -381,6 +381,7 @@ body.light-mode .dropdown-content button {
 #importImage {
     background: var(--primary-color);
     color: white;
+    display: none; /* 隐藏导入图片按钮 */
 }
 
 #importImage:hover {
