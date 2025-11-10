@@ -1,4 +1,129 @@
-# Simple Image Cropping Tool
-这是一个图片小工具将图像裁剪为指定的分辨率和比例，下载图像并将其复制到剪贴板，支持旋转和镜像，还有比例计算器，并支持夜间模式。
-This is a picture widget that crops images to a specified resolution and ratio, downloads images and copies them to the clipboard, supports rotation and mirroring, has a ratio calculator, and supports night mode.
-在线使用地址https://goldierillimagecrop.netlify.app
+# 🖼️ Simple Image Toolbox
+
+一个现代化的图片处理工具集，支持图片裁剪和比例计算，采用深色模式优先的卡片式设计。
+
+> English: A modern image processing toolkit that supports image cropping and aspect ratio calculation, featuring a dark-mode-first card-based design.
+
+[![在线使用](https://img.shields.io/badge/在线使用-Visit_Now-4d76ae?style=for-the-badge&logo=netlify)](https://goldierillimagecrop.netlify.app)
+
+## ✨ 主要功能
+
+### 🖼️ 图片裁剪器
+- **Canvas 实时编辑**：基于 HTML5 Canvas 的图片编辑体验
+- **多比例支持**：1:1、4:3、16:9、3:2、21:9 等常用比例
+- **变换操作**：
+  - 🔄 自由旋转（45° 增量）
+  - ↔️ 水平/垂直镜像
+  - 🔍 缩放调整
+- **智能导出**：
+  - 💾 下载为 PNG/JPEG 格式
+  - 📋 一键复制到剪贴板
+  - 📏 自定义输出分辨率
+
+### 🧮 比例计算器
+- **实时计算**：输入任意数值快速计算比例
+- **预设比例**：常见社交媒体和设计比例一键选择
+- **结果显示**：清晰显示数值关系和百分比
+
+### 🎨 视觉体验
+- **🌙 深色模式优先**：舒适的暗色主题设计
+- **🌞 浅色模式**：支持明亮主题切换
+- **📱 响应式设计**：完美适配桌面端和移动端
+- **🎯 统一设计语言**：现代化卡片式 UI
+
+## 🏗️ 技术特点
+
+### 布局策略
+- **图片裁剪页面**：Flexbox + Grid 复杂嵌套布局
+- **比例计算页面**：纯 Flexbox 简洁居中布局
+- **响应式切换**：移动端自动优化布局结构
+
+### 设计系统
+```css
+/* 统一的设计 Token */
+:root {
+    --primary-color: #4d76ae;        /* 主色调 */
+    --text-color-dark: #e8eaed;      /* 深色文本 */
+    --bg-color-dark: #202124;        /* 深色背景 */
+    --surface-color-dark: #292a2d;   /* 表面颜色 */
+}
+```
+
+### 交互反馈
+- **悬停效果**：背景色渐变动画
+- **点击反馈**：缩放动画效果
+- **过渡动画**：0.2s 平滑过渡
+
+## 🎯 设计哲学
+
+### 核心理念
+- **功能决定形式**：根据功能复杂度选择合适的布局技术
+- **视觉一致性**：通过 CSS 变量确保全局统一
+- **渐进增强**：从简单到复杂，层层递进
+- **用户友好**：清晰的视觉层次和交互反馈
+
+### 布局对比
+
+| 特性 | 图片裁剪页面 | 比例计算页面 |
+|------|------------|------------|
+| **功能复杂度** | 高（图片编辑、变换、缩放） | 低（数值计算） |
+| **布局技术** | Flexbox + Grid | 纯 Flexbox |
+| **嵌套层级** | 多层嵌套（3-4层） | 扁平结构（2层） |
+| **响应式方案** | 改变布局模式 | 调整尺寸间距 |
+
+## 📱 响应式设计
+
+### 断点设计
+- **🖥️ 桌面端**：`min-width: 512px`
+- **📱 移动端**：`max-width: 512px`
+- **📲 小屏设备**：`max-width: 380px`
+
+### 移动端优化
+- **Canvas 自适应**：最大宽度从 720px 降至 384px
+- **按钮布局**：Flexbox 切换为 Grid 布局
+- **交互优化**：显示"旋转模式"切换按钮
+- **尺寸调整**：按钮和字体大小智能缩放
+
+## 🚀 快速开始
+
+1. **在线使用**：直接访问 [Image Toolbox](https://goldierillimagecrop.netlify.app)
+2. **本地部署**：
+   ```bash
+   git clone [项目地址]
+   cd Image-Toolbox
+   # 直接在浏览器中打开 index.html
+   ```
+
+## 🎨 使用指南
+
+### 图片裁剪
+1. 点击"导入图片"按钮选择图片
+2. 选择合适的比例或调整画布大小
+3. 使用旋转、镜像工具进行变换
+4. 点击"下载"或"复制到剪贴板"导出结果
+
+### 比例计算
+1. 点击"比例计算"按钮切换到计算器模式
+2. 在输入框中输入数值
+3. 选择预设比例或自定义计算
+4. 查看实时计算结果
+
+## 🌟 设计亮点
+
+- ✅ **双主题支持**：深色和浅色模式无缝切换
+- ✅ **渐进式布局**：从简单到复杂，层层递进
+- ✅ **统一设计语言**：通过 CSS 变量实现全局一致性
+- ✅ **优雅交互**：悬停、点击、过渡动画流畅自然
+- ✅ **移动友好**：完美的移动端体验优化
+
+## 📄 许可证
+
+本项目采用 MIT 许可证，详情请查看 [LICENSE](LICENSE) 文件。
+
+## 🤝 贡献
+
+欢迎提交 Issue 和 Pull Request 来帮助改进这个项目！
+
+---
+
+*Made with ❤️ by [Goldie Rill] - 现代化图片处理工具，让图片编辑更简单！*
