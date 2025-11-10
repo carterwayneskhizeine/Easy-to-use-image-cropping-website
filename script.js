@@ -666,14 +666,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // 语言切换按钮点击事件
     languageToggle.addEventListener('click', () => {
-        if (languageToggle.textContent === 'ZH') {
-            languageToggle.textContent = 'EN';
+        if (languageToggle.textContent === 'EN') {
+            languageToggle.textContent = 'CN';
             document.body.classList.add('en-mode');
             document.querySelectorAll('[data-lang-zh]').forEach(el => {
                 el.textContent = el.getAttribute('data-lang-en');
             });
         } else {
-            languageToggle.textContent = 'ZH';
+            languageToggle.textContent = 'EN';
             document.body.classList.remove('en-mode');
             document.querySelectorAll('[data-lang-zh]').forEach(el => {
                 el.textContent = el.getAttribute('data-lang-zh');
